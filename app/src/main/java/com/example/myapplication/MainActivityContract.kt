@@ -1,5 +1,7 @@
 package com.example.myapplication
 
+import io.reactivex.rxjava3.core.Observable
+
 interface MainActivityContract {
 
     interface View {
@@ -16,6 +18,6 @@ interface MainActivityContract {
     interface Model {
         val imageResource: HashMap <Int, Int>
 
-        fun getResult()
+        fun getResult() : Observable<Int>
     }
 }

@@ -1,8 +1,13 @@
 package com.example.myapplication
 
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
+import kotlin.random.Random
+
 class Model : MainActivityContract.Model {
 
-    override val imageResource : HashMap <Int, Int> = HashMap()
+    override val imageResource: HashMap <Int, Int> = HashMap()
 
     init {
         imageResource[1] = R.drawable.dice1
@@ -13,7 +18,9 @@ class Model : MainActivityContract.Model {
         imageResource[6] = R.drawable.dice6
     }
 
-    override fun getResult() {
-        TODO("Not yet implemented")
+    override fun getResult(): Observable<Int> {
+        return Observable.timer(2, TimeUnit.SECONDS)
+            .map { Random.nextInt(6) + 1 }
+            .subscribeOn(Schedulers.io())
     }
 }
